@@ -1,48 +1,104 @@
 import React from 'react'
+import { motion } from "framer-motion";
 
 function Register() {
     return (
-        <>
-            <div className="min-h-screen mx-auto flex flex-col justify-center lg:grid lg:grid-cols-2 md:px-12 md:pr-10 md:py-20 gap-8 max-w-5xl">
-                {/* Left Side */}
-                <div className="hidden  md:flex flex-col items-center lg:items-end mb-8 lg:mb-0">
-                    <div className="justify-end w-full max-w-md rounded-3xl bg-gradient-to-t from-blue-700 via-blue-700 to-blue-600 px-4 py-10 text-white sm:px-10 md:m-6 md:mr-8">
-                        <p className="mb-5 font-bold tracking-wider">CORINE</p>
-                        <p className="mb-4 text-3xl font-bold md:text-4xl md:leading-snug">
-                            Start your <br />
-                            journey with us
-                        </p>
-                        <p className="mb-5 leading-relaxed text-gray-200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere nisi voluptas a officia. Omnis.</p>
-                        <div className="bg-blue-600/80 rounded-2xl px-4 py-5">
-                            <p className="mb-3 text-gray-200">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error ea voluptates sapiente!</p>
-                            <div className="flex items-center">
-                                <img className="h-10 w-10 rounded-full object-cover" src="/images/y9s3xOJV6rnQPKIrdPYJy.png" alt="Simon Lewis" />
-                                <p className="ml-4 w-56">
-                                    <strong className="block font-medium">Simon Lewis</strong>
-                                    <span className="text-xs text-gray-200"> Published 12 Bestsellers </span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Right Side (Form) */}
-                <div className="px-4 py-4 flex flex-col mt-10 sm:pt-10 max-w-md w-full mx-auto">
-                    <h2 className="mb-2 text-3xl font-bold">Sign Up</h2>
-                    <a href="#" className="mb-10 block font-bold text-gray-600">Have an account</a>
-
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+            
+            <motion.div 
+                className="relative w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-xl flex flex-col md:flex-row overflow-hidden"
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: "100%", opacity: 1 }}
+                transition={{ 
+                    duration: 0.8, 
+                    ease: "easeOut",
+                    width: { duration: 0.6, ease: "easeOut" },
+                    opacity: { duration: 0.8, delay: 0.2 }
+                }}
+                style={{ transformOrigin: "center" }}
+            >
+                {/* Left Side - Testimonial */}
+                <motion.div 
+                    className="hidden md:flex flex-col justify-center items-start bg-blue-700 text-white px-10 py-12 w-1/2 relative"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                >
                     <div>
-                        <p className="mb-1 font-medium text-gray-500">Enter your 10 digit mobile number</p>
-                        <div className="mb-4 flex flex-col relative">
-                            <div className="focus-within:border-blue-600 relative flex overflow-hidden rounded-xl border-2 transition w-full">
-                                <input type="number" id="signup-email" className="w-full border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Enter your 10 digit mobile number" />
+                        <div className="flex items-center gap-2 mb-4">
+                            <svg width="32" height="32" fill="none" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#fff" fillOpacity=".1"/><path d="M10.5 17.5L16 12l5.5 5.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                            <span className="font-semibold text-lg">Lattice</span>
+                        </div>
+                        <p className="text-lg mb-8">
+                            "The Lattice team loves Dock! The platform streamlines the buying experience and empowers our champions to make the case for our product to internal stakeholders at their companies"
+                        </p>
+                        <div className="flex items-center gap-3 mt-6">
+                            <img
+                                src="https://randomuser.me/api/portraits/women/44.jpg"
+                                alt="Dini Mehta"
+                                className="h-10 w-10 rounded-full object-cover"
+                            />
+                            <div>
+                                <div className="font-bold">Dini Mehta</div>
+                                <div className="text-xs text-blue-100">CRO, Lattice</div>
                             </div>
-                        <button className="text-sm absolute top-1 right-1 cursor-pointer hover:shadow-blue-600/40 rounded-xl bg-gradient-to-r from-blue-700 to-blue-600 px-4 py-2 font-bold text-white transition-all hover:opacity-90 hover:shadow-lg ">Sign Up</button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </>
+                </motion.div>
+                {/* Right Side - Form */}
+                <motion.div 
+                    className="flex-1 flex flex-col justify-center px-8 py-12"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                >
+                    <motion.h2 
+                        className="text-2xl font-bold mb-2"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.8 }}
+                    >
+                        Sign up for OTG Cares. It's free.
+                    </motion.h2>
+                    
+                    <motion.div 
+                        className="mb-2 text-sm text-gray-600"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.9 }}
+                    >
+                        Sign up with phone<br />
+                        
+                    </motion.div>
+                    <motion.input
+                        type="number"
+                        placeholder="Phone number"
+                        className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 1.0 }}
+                    />
+                    <motion.button 
+                        className="w-full bg-blue-100 text-blue-700 font-semibold py-2 rounded-md hover:bg-blue-200 transition mb-2"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 1.1 }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                    >
+                        Continue
+                    </motion.button>
+                    <motion.p 
+                        className="text-xs text-gray-400 mt-2"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 1.2 }}
+                    >
+                        By submitting your information, you agree to Dock's Terms of Service and Privacy Policy. You can opt out anytime.
+                    </motion.p>
+                </motion.div>
+            </motion.div>
+        </div>
     )
 }
 

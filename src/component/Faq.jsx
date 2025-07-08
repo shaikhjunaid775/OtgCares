@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 function Faq() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(-1);
   const faqs = [
     {
       question: 'How can I pay for my appointment ?',
@@ -26,45 +26,42 @@ function Faq() {
   ];
 
   return (
-    <>
-      <section className="bg-white dark:bg-gray-900">
-        <div className="container px-6 py-10 mx-auto">
-          <h1 className="text-2xl font-semibold text-gray-800 lg:text-3xl dark:text-white">FAQ's</h1>
-          <div className="my-6 " ></div>
-          <div>
-            {faqs.map((faq, idx) => (
-              <div key={idx}>
-                <button
-                  className="flex items-center focus:outline-none w-full"
-                  onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
-                  aria-expanded={openIndex === idx}
-                  aria-controls={`faq-answer-${idx}`}
-                >
+    <section className="bg-white min-h-screen flex flex-col items-center justify-center">
+      <div className="w-full max-w-3xl mx-auto px-4 py-12">
+        <h1 className="text-5xl font-extrabold mb-12 text-gray-900">Frequently asked questions</h1>
+        <div className="divide-y divide-gray-200">
+          {faqs.map((faq, idx) => (
+            <div key={idx}>
+              <button
+                className="w-full flex items-center justify-between py-6 focus:outline-none group"
+                onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)}
+                aria-expanded={openIndex === idx}
+                aria-controls={`faq-answer-${idx}`}
+              >
+                <span className="text-lg text-left font-medium text-gray-900 group-hover:text-blue-700 transition-colors">{faq.question}</span>
+                <span className="ml-4 flex-shrink-0">
                   <svg
-                    className="flex-shrink-0 w-6 h-6 text-blue-500 transition-transform duration-200"
+                    className={`w-6 h-6 text-gray-700 transition-transform duration-300 ${openIndex === idx ? 'rotate-45' : ''}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
-                    style={{ transform: openIndex === idx ? 'rotate(90deg)' : 'rotate(0deg)' }}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                    <line x1="12" y1="5" x2="12" y2="19" strokeWidth="2" strokeLinecap="round"/>
+                    <line x1="5" y1="12" x2="19" y2="12" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
-                  <h1 className="mx-4 text-xl text-gray-700 dark:text-white text-left">{faq.question}</h1>
-                </button>
-                {openIndex === idx && (
-                  <div className="flex mt-8 md:mx-10" id={`faq-answer-${idx}`}>
-                    <span className="border border-blue-500"></span>
-                    <p className="max-w-3xl px-4 text-gray-500 dark:text-gray-300">{faq.answer}</p>
-                  </div>
-                )}
-                <hr className="my-4 border-gray-200 dark:border-gray-700" />
-              </div>
-            ))}
-          </div>
+                </span>
+              </button>
+              {openIndex === idx && (
+                <div className="px-2 pb-6 text-gray-600 animate-fade-in" id={`faq-answer-${idx}`}>
+                  {faq.answer}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }
 
