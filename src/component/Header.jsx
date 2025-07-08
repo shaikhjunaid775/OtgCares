@@ -3,12 +3,14 @@ import { FaUserCircle, FaChevronDown } from "react-icons/fa";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import logo from "/logo.svg"
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [designDropdown, setDesignDropdown] = useState(false);
   const [magazineDropdown, setMagazineDropdown] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
+  const navigate = useNavigate()
 
   const handleMenu = (e) => {
     setProfileMenu((prev) => !prev)
@@ -72,6 +74,10 @@ function Header() {
     "Refer a Friend",
     "Own a franchise",
   ];
+
+  const handleSignup = () =>{
+    navigate('/register')
+  }
   return (
     <>
       <motion.div
@@ -222,7 +228,7 @@ function Header() {
                 transition={{ duration: 0.5, delay: 1.6 }}
               >
                 <motion.div
-                className="hidden lg:flex items-center gap-1 cursor-pointer"
+                className="hidden lg:flex items-center gap-1"
                 onClick={handleMenu}
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -232,7 +238,7 @@ function Header() {
                 <FaChevronDown className="text-xs" />
                 
                 {profileMenu && (
-                  <div className="absolute top-14 right-5 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                  <div className="absolute top-14 right-5 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" >
                     <div className="flex flex-col p-2  ">
                     <h2 
                         className="text-xs font-bold mb-2"
@@ -240,7 +246,7 @@ function Header() {
                     >
                         Sign up for OTG Cares. It's free.
                     </h2>
-                    <button type="button" class="w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Sign Up</button>
+                    <button onClick={handleSignup} type="button" class="w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 cursor-pointer">Sign Up</button>
                     </div>
                   </div>
                 )}
