@@ -1,11 +1,6 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import React, { useState } from 'react';
 
-const testimonials = [
+const defaultTestimonials = [
   {
     name: 'Jessica Elba',
     title: 'CEO, Salesforce',
@@ -32,53 +27,92 @@ const testimonials = [
   },
 ];
 
-function Testomonial() {
+function Testomonial({ testimonials }) {
+  const data = testimonials && testimonials.length > 0 ? testimonials : defaultTestimonials;
+  const [active, setActive] = useState(0);
+
+  const handlePrev = () => {
+    setActive((prev) => (prev === 0 ? data.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setActive((prev) => (prev === data.length - 1 ? 0 : prev + 1));
+  };
+
   return (
-    <section className="py-12 text-blue-900 sm:py-16 lg:py-20">
-      <div className="relative mx-auto max-w-screen-lg px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center">
-          <div className="text-center">
-            <p className="text-lg font-medium text-blue-600">What clients say about their experience with us</p>
-            <h2 className="mt-4 text-3xl font-bold text-blue-900 sm:text-4xl xl:text-5xl">Client Testimonials</h2>
-          </div>
-
-          <div className="order-3 mt-8 text-center md:mt-12">
-            <button className="mb-20 rounded-lg border-2 border-blue-700 bg-blue-700 px-6 py-2 font-medium text-white transition hover:translate-y-1">More reviews on Google</button>
-          </div>
-
-          <div className="relative mx-auto max-w-2xl w-full mt-10">
-            <Swiper
-              modules={[Navigation, Pagination, A11y]}
-              spaceBetween={30}
-              slidesPerView={1}
-              navigation
-              pagination={{ clickable: true }}
-              className="w-full"
-            >
-              {testimonials.map((t, idx) => (
-                <SwiperSlide key={idx}>
-                  <div className="flex flex-col items-center bg-white rounded-2xl shadow-xl px-6 py-10">
-                    <span className="rounded-full bg-blue-500 p-3 text-5xl text-white mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill="currentColor" fillRule="evenodd" d="M7.16 3.5C4.73 5.06 3.55 6.67 3.55 9.36c.16-.05.3-.05.44-.05c1.27 0 2.5.86 2.5 2.41c0 1.61-1.03 2.61-2.5 2.61c-1.9 0-2.99-1.52-2.99-4.25c0-3.8 1.75-6.53 5.02-8.42L7.16 3.5zm7 0c-2.43 1.56-3.61 3.17-3.61 5.86c.16-.05.3-.05.44-.05c1.27 0 2.5.86 2.5 2.41c0 1.61-1.03 2.61-2.5 2.61c-1.89 0-2.98-1.52-2.98-4.25c0-3.8 1.75-6.53 5.02-8.42l1.14 1.84h-.01z" clipRule="evenodd" /></svg>
-                    </span>
-                    <blockquote className="mt-4 flex-1">
-                      <p className="max-w-xl text-lg font-medium leading-relaxed text-blue-900">{t.text}</p>
-                    </blockquote>
-                    <div className="mx-auto mt-8 flex items-center">
-                      <img className="h-11 w-11 flex-shrink-0 rounded-full object-cover" src={t.image} alt={t.name} />
-                      <div className="ml-4 text-left">
-                        <p className="text-base font-bold text-blue-900">{t.name}</p>
-                        <p className="text-blue-900 mt-0.5 text-sm">{t.title}</p>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
+    <div className="my-10 md:my-24 container mx-auto flex flex-col md:flex-row shadow-sm overflow-hidden">
+      {/* Left Panel */}
+      <div class="absolute top-0 left-0 z-10 grid-indigo w-16 h-16 md:w-40 md:h-40 md:ml-20 md:mt-24"></div>
+      <div className="relative w-full py-2 md:py-24 bg-indigo-700 md:w-1/2 flex flex-col items-center justify-center">
+        <div className="absolute top-0 left-0 z-10 w-16 h-16 md:w-40 md:h-40 md:ml-20 md:mt-24 bg-indigo-600 opacity-10 rounded-full"></div>
+        <div className="relative text-2xl md:text-5xl py-2 px-6 md:py-6 md:px-1 md:w-64 md:mx-auto text-indigo-100 font-semibold leading-tight tracking-tight mb-0 z-20">
+          <span className="md:block">What Our</span>
+          <span className="md-block">Customers</span>
+          <span className="block">Are Saying!</span>
+        </div>
+        {/* Navigation Arrows (Desktop only) */}
+        <div className="absolute right-0 bottom-0 mr-4 mb-4 hidden md:block z-20">
+          <button
+            className="rounded-l-full border-r bg-gray-100 text-gray-500 focus:outline-none hover:text-indigo-500 font-bold w-12 h-10"
+            onClick={handlePrev}
+          >
+            &#8592;
+          </button>
+          <button
+            className="rounded-r-full bg-gray-100 text-gray-500 focus:outline-none hover:text-indigo-500 font-bold w-12 h-10"
+            onClick={handleNext}
+          >
+            &#8594;
+          </button>
         </div>
       </div>
-    </section>
+      {/* Right Panel */}
+      <div className="bg-gray-100 md:w-1/2 flex flex-col relative">
+        {/* Quote Icon */}
+        <div className="absolute top-0 left-0 mt-3 ml-4 md:mt-5 md:ml-12">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="text-indigo-200 fill-current w-12 h-12 md:w-16 md:h-16"
+            viewBox="0 0 24 24"
+          >
+            <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L9.758 4.03c0 0-.218.052-.597.144C8.97 4.222 8.737 4.278 8.472 4.345c-.271.05-.56.187-.882.312C7.272 4.799 6.904 4.895 6.562 5.123c-.344.218-.741.4-1.091.692C5.132 6.116 4.723 6.377 4.421 6.76c-.33.358-.656.734-.909 1.162C3.219 8.33 3.02 8.778 2.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C2.535 17.474 4.338 19 6.5 19c2.485 0 4.5-2.015 4.5-4.5S8.985 10 6.5 10zM17.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35.208-.086.39-.16.539-.222.302-.125.474-.197.474-.197L20.758 4.03c0 0-.218.052-.597.144-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162C14.219 8.33 14.02 8.778 13.81 9.221c-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539.017.109.025.168.025.168l.026-.006C13.535 17.474 15.338 19 17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10z" />
+          </svg>
+        </div>
+        {/* Testimonial Text */}
+        <div className="h-full relative z-10 flex flex-col justify-center flex-1">
+          <p className="text-gray-600 font-normal italic px-6 py-6 md:px-16 md:py-10 text-xl md:text-2xl">
+            {data[active].text}
+          </p>
+        </div>
+        
+        {/* Name and Title */}
+        <div className="flex justify-center px-6 pt-2 pb-6 md:py-6">
+          <div className="text-center">
+            <h2 className="text-sm md:text-base font-bold text-gray-700 leading-tight">
+              {data[active].name}
+            </h2>
+            <small className="text-gray-500 text-xs md:text-sm truncate">
+              {data[active].title}
+            </small>
+          </div>
+        </div>
+        {/* Mobile Arrows */}
+        <div className="flex justify-center md:hidden mb-4">
+          <button
+            className="rounded-l-full border-r bg-gray-100 text-gray-500 focus:outline-none hover:text-indigo-500 font-bold w-12 h-10"
+            onClick={handlePrev}
+          >
+            &#8592;
+          </button>
+          <button
+            className="rounded-r-full bg-gray-100 text-gray-500 focus:outline-none hover:text-indigo-500 font-bold w-12 h-10"
+            onClick={handleNext}
+          >
+            &#8594;
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
