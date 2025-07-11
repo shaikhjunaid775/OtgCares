@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import { AuthContextProvider } from './context/AuthContext';
 import Layout from './component/Layout';
 import Register from './pages/Register';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 const routes = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const routes = createBrowserRouter([
         path: "/login",
         element: <Login />
       },
+      {
+        path: "/about",
+        element: <About />
+      },
+      {
+        path: "/contact",
+        element: <Contact />
+      }
     ],
   },
 ]);

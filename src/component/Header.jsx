@@ -3,13 +3,15 @@ import { FaUserCircle, FaChevronDown } from "react-icons/fa";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import logo from "/logo.svg"
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [designDropdown, setDesignDropdown] = useState(false);
   const [magazineDropdown, setMagazineDropdown] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
+  const [mobileDesignDropdown, setMobileDesignDropdown] = useState(false);
+  const [mobileMagazineDropdown, setMobileMagazineDropdown] = useState(false);
   const navigate = useNavigate()
 
   const handleMenu = (e) => {
@@ -75,7 +77,7 @@ function Header() {
     "Own a franchise",
   ];
 
-  const handleSignup = () =>{
+  const handleSignup = () => {
     navigate('/register')
   }
   return (
@@ -108,7 +110,7 @@ function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.9 }}
               >
-                Interiors <FaChevronDown className="text-xs" />
+                Interiors 
               </motion.div>
 
               <motion.div
@@ -181,21 +183,26 @@ function Header() {
               </motion.div>
 
               <motion.div
+                
                 className="flex items-center gap-1 cursor-pointer"
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.4 }}
               >
+                <Link to="/about" className="flex items-center gap-1 cursor-pointer">
                 About us
+                </Link>
               </motion.div>
 
-              <motion.div
+              <motion.div 
                 className="flex items-center gap-1 cursor-pointer"
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.5 }}
               >
+                <Link to="/contact" className="flex items-center gap-1 cursor-pointer">
                 Contact us
+                </Link>
               </motion.div>
               {/* <div className="flex items-center gap-1 cursor-pointer">
                 More <FaChevronDown className="text-xs" />
@@ -211,7 +218,7 @@ function Header() {
               >
                 <FaUserCircle className="text-2xl" />
                 <FaChevronDown className="text-xs" />
-                
+
                 {profileMenu && (
                   <div className="absolute top-14 right-5 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                     <a href="#" className="block px-4 py-2 text-sm text-gray-700" >Your Profile</a>
@@ -228,29 +235,29 @@ function Header() {
                 transition={{ duration: 0.5, delay: 1.6 }}
               >
                 <motion.div
-                className="hidden lg:flex items-center gap-1"
-                onClick={handleMenu}
-                initial={{ opacity: 0, y: -30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.6 }}
-              >
-                <FaUserCircle className="text-2xl" />
-                <FaChevronDown className="text-xs" />
-                
-                {profileMenu && (
-                  <div className="absolute top-14 right-5 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" >
-                    <div className="flex flex-col p-2  ">
-                    <h2 
-                        className="text-xs font-bold mb-2"
-                        
-                    >
-                        Sign up for OTG Cares. It's free.
-                    </h2>
-                    <button onClick={handleSignup} type="button" class="w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 cursor-pointer">Sign Up</button>
+                  className="hidden lg:flex items-center gap-1"
+                  onClick={handleMenu}
+                  initial={{ opacity: 0, y: -30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 1.6 }}
+                >
+                  <FaUserCircle className="text-2xl" />
+                  <FaChevronDown className="text-xs" />
+
+                  {profileMenu && (
+                    <div className="absolute top-14 right-5 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" >
+                      <div className="flex flex-col p-2  ">
+                        <h2
+                          className="text-xs font-bold mb-2"
+
+                        >
+                          Sign up for OTG Cares. It's free.
+                        </h2>
+                        <button onClick={handleSignup} type="button" className="w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 cursor-pointer">Sign Up</button>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </motion.div>
+                  )}
+                </motion.div>
               </motion.div>
             )}
 
@@ -275,25 +282,123 @@ function Header() {
               transition={{ duration: 0.3 }}
             >
               <ul className="space-y-3 text-gray-700 text-lg font-semibold">
-                {navItems.map((item, idx) => (
-                  <motion.li
-                    key={idx}
-                    className="border-b pb-2"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: idx * 0.1 }}
-                  >
-                    {item}
-                  </motion.li>
-                ))}
+                {/* Interiors */}
+                <motion.li
+                  className="flex items-center gap-1 cursor-pointer"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                >
+                  Interiors 
+                </motion.li>
+                {/* Design Ideas with mobile dropdown */}
+                <motion.li
+                  className="flex flex-col gap-1 cursor-pointer"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                >
+                  <div className="flex items-center gap-1" onClick={() => setMobileDesignDropdown((prev) => !prev)}>
+                    Design Ideas <FaChevronDown className="text-xs" />
+                  </div>
+                  {mobileDesignDropdown && (
+                    <ul className="pl-4 py-2 max-h-[220px] overflow-auto">
+                      {designIdeas.map((item, idx) => (
+                        <li key={idx} className="mb-2">
+                          <a href={item.link} className="text-sm text-gray-700 hover:text-red-500">
+                            {item.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </motion.li>
+                {/* Magazine with mobile dropdown */}
+                <motion.li
+                  className="flex flex-col gap-1 cursor-pointer"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
+                >
+                  <div className="flex items-center gap-1" onClick={() => setMobileMagazineDropdown((prev) => !prev)}>
+                    Magazine <FaChevronDown className="text-xs" />
+                  </div>
+                  {mobileMagazineDropdown && (
+                    <ul className="pl-4 py-2 max-h-[220px] overflow-auto">
+                      {magazineItems.map((item, idx) => (
+                        <li key={idx} className="mb-2">
+                          <a href={item.link} className="text-sm text-gray-700 hover:text-red-500">
+                            {item.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </motion.li>
+                {/* Livspace TV */}
+                <motion.li
+                  className="flex items-center gap-1 cursor-pointer"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
+                >
+                  Livspace TV
+                </motion.li>
+                {/* Livspace Portfolio */}
+                <motion.li
+                  className="flex items-center gap-1 cursor-pointer"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.5 }}
+                >
+                  Livspace Portfolio
+                </motion.li>
+                {/* About us */}
+                <motion.li
+                 as={Link}
+                to="/about"
+                  className="flex items-center gap-1 cursor-pointer"
+                  initial={{ opacity: 0, x: -20 }}  
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.6 }}
+                >
+                  <Link to="/about" className="flex items-center gap-1 cursor-pointer">
+                  About us
+                  </Link>
+                </motion.li>
+                {/* Contact us */}
+                <motion.li
+                  className="flex items-center gap-1 cursor-pointer"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.7 }}
+                >
+                  <Link to="/contact" className="flex items-center gap-1 cursor-pointer">Contact us</Link>
+                </motion.li>
+                {/* User/Profile logic as before */}
                 {loggedinUser ? (
                   <motion.li
                     className="mt-2 flex items-center gap-2 text-gray-600"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: navItems.length * 0.1 }}
+                    transition={{ duration: 0.4, delay: 0.8 }}
                   >
-                    <FaUserCircle /> Profile
+                    <FaUserCircle className="text-2xl" />
+                  <FaChevronDown className="text-xs" />
+
+                  {profileMenu && (
+                    <div className="absolute top-14 right-5 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" >
+                      <div className="flex flex-col p-2  ">
+                        <h2
+                          className="text-xs font-bold mb-2"
+
+                        >
+                          Sign up for OTG Cares. It's free.
+                        </h2>
+                        <button onClick={handleSignup} type="button" className="w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 cursor-pointer">Sign Up</button>
+                      </div>
+                    </div>
+                  )}
                   </motion.li>
                 ) : (
                   <>
@@ -301,7 +406,7 @@ function Header() {
                       className="mt-2 flex items-center gap-2 text-gray-600 border-b pb-2"
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: navItems.length * 0.1 }}
+                      transition={{ duration: 0.4, delay: 0.8 }}
                     >
                       <a href="/login" className="flex items-center gap-2">
                         <FaUserCircle /> Login
@@ -311,7 +416,7 @@ function Header() {
                       className="mt-2 flex items-center gap-2 text-gray-600"
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: (navItems.length + 1) * 0.1 }}
+                      transition={{ duration: 0.4, delay: 0.9 }}
                     >
                       <a href="/register" className="flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-md">
                         Register

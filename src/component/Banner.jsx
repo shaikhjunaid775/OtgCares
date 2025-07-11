@@ -52,7 +52,7 @@ const Banner = () => {
     };
 
     return (
-        <div className="relative w-full overflow-hidden ">
+        <div className="relative w-full overflow-hidden  ">
             <Slider {...settings}>
                 {banners.map((item) => (
                     <div key={item.id} className="relative">
