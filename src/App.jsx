@@ -7,6 +7,8 @@ import Layout from './component/Layout';
 import Register from './pages/Register';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Portfolio from './pages/Portfolio';
+import OTGTv from './pages/OTGTv';
 
 const routes = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const routes = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />
+      },
+      {
+        path: '/portfolio',
+        element: <Portfolio />
+      },
+      {
+        path: '/otgTv',
+        element: <OTGTv />
       }
     ],
   },

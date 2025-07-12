@@ -3,7 +3,7 @@ import { FaUserCircle, FaChevronDown } from "react-icons/fa";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import logo from "/logo.svg"
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -13,6 +13,8 @@ function Header() {
   const [mobileDesignDropdown, setMobileDesignDropdown] = useState(false);
   const [mobileMagazineDropdown, setMobileMagazineDropdown] = useState(false);
   const navigate = useNavigate()
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const handleMenu = (e) => {
     setProfileMenu((prev) => !prev)
@@ -80,6 +82,15 @@ function Header() {
   const handleSignup = () => {
     navigate('/register')
   }
+
+  // For dropdown highlight
+  const isPortfolioActive = currentPath === "/portfolio";
+  const isAboutActive = currentPath === "/about";
+  const isContactActive = currentPath === "/contact";
+  const isOTGTvActive = currentPath === "/OTGTv";
+  const isDesignIdeasActive = designIdeas.some(item => item.link && currentPath.startsWith(item.link));
+  const isMagazineActive = magazineItems.some(item => item.link && currentPath.startsWith(item.link));
+
   return (
     <>
       <motion.div
@@ -114,7 +125,7 @@ function Header() {
               </motion.div>
 
               <motion.div
-                className="flex items-center gap-1 cursor-pointer relative"
+                className={`flex items-center gap-1 cursor-pointer relative ${isDesignIdeasActive ? "text-red-700 font-bold" : ""}`}
                 onMouseEnter={() => setDesignDropdown(true)}
                 onMouseLeave={() => setDesignDropdown(false)}
                 initial={{ opacity: 0, y: -30 }}
@@ -140,7 +151,7 @@ function Header() {
               </motion.div>
 
               <motion.div
-                className="flex items-center gap-1 cursor-pointer relative"
+                className={`flex items-center gap-1 cursor-pointer relative ${isMagazineActive ? "text-red-700 font-bold" : ""}`}
                 onMouseEnter={() => setMagazineDropdown(true)}
                 onMouseLeave={() => setMagazineDropdown(false)}
                 initial={{ opacity: 0, y: -30 }}
@@ -165,7 +176,7 @@ function Header() {
               </motion.div>
 
               <motion.div
-                className="flex items-center gap-1 cursor-pointer"
+                className={`flex items-center gap-1 cursor-pointer ${isOTGTvActive ? "text-red-700 font-bold" : "" }`}
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.2 }}
@@ -174,12 +185,14 @@ function Header() {
               </motion.div>
 
               <motion.div
-                className="flex items-center gap-1 cursor-pointer"
+                className={`flex items-center gap-1 cursor-pointer ${isPortfolioActive ? "text-red-700 font-bold" : ""}`}
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.3 }}
               >
-                Livspace Portfolio
+                <Link to="/portfolio" className="flex items-center gap-1 cursor-pointer">
+                  Livspace Portfolio
+                </Link>
               </motion.div>
 
               <motion.div
@@ -189,7 +202,7 @@ function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.4 }}
               >
-                <Link to="/about" className="flex items-center gap-1 cursor-pointer">
+                <Link to="/about" className={`flex items-center gap-1 cursor-pointer ${isAboutActive ? "text-red-700 font-bold" : ""}`}>
                 About us
                 </Link>
               </motion.div>
@@ -200,7 +213,7 @@ function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.5 }}
               >
-                <Link to="/contact" className="flex items-center gap-1 cursor-pointer">
+                <Link to="/contact" className={`flex items-center gap-1 cursor-pointer ${isContactActive ? "text-red-700 font-bold" : ""}`}>
                 Contact us
                 </Link>
               </motion.div>
@@ -362,7 +375,7 @@ function Header() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.6 }}
                 >
-                  <Link to="/about" className="flex items-center gap-1 cursor-pointer">
+                  <Link to="/about" className={`flex items-center gap-1 cursor-pointer ${isAboutActive ? "text-red-700 font-bold" : ""}`}>
                   About us
                   </Link>
                 </motion.li>
@@ -373,7 +386,7 @@ function Header() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.7 }}
                 >
-                  <Link to="/contact" className="flex items-center gap-1 cursor-pointer">Contact us</Link>
+                  <Link to="/contact" className={`flex items-center gap-1 cursor-pointer ${isContactActive ? "text-red-700 font-bold" : ""}`}>Contact us</Link>
                 </motion.li>
                 {/* User/Profile logic as before */}
                 {loggedinUser ? (
