@@ -45,6 +45,12 @@ function Login() {
             />
           </AnimatedFormField>
 
+          <AnimatedFormField delay={0.25}>
+            <AnimatedText className="text-right text-xs text-blue-600 hover:text-blue-700 mb-2 block cursor-pointer" delay={0.25}>
+              <a href="/forgot-password">Forgot password?</a>
+            </AnimatedText>
+          </AnimatedFormField>
+
           <AnimatedFormField delay={0.3}>
             <AnimatedButton
               className="bg-blue-600 text-white hover:bg-blue-700 mb-4"

@@ -21,7 +21,11 @@ function Header() {
     console.log(profileMenu)
   }
 
-  const loggedinUser = true
+  const user = {
+    isLoggedIn: false, // set to false to simulate logged out
+    name: 'Albert Edison',
+    avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+  };
 
   const magazineItems = [
     { title: "Room Ideas", link: "/in/magazine/type/rooms" },
@@ -87,7 +91,7 @@ function Header() {
   const isPortfolioActive = currentPath === "/portfolio";
   const isAboutActive = currentPath === "/about";
   const isContactActive = currentPath === "/contact";
-  const isOTGTvActive = currentPath === "/OTGTv";
+  const isOTGTvActive = currentPath === "/otgTv";
   const isDesignIdeasActive = designIdeas.some(item => item.link && currentPath.startsWith(item.link));
   const isMagazineActive = magazineItems.some(item => item.link && currentPath.startsWith(item.link));
 
@@ -181,7 +185,9 @@ function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.2 }}
               >
-                Livspace TV
+                <Link to="/otgTv" className="flex items-center gap-1 cursor-pointer">
+                OTG TV
+                </Link>
               </motion.div>
 
               <motion.div
@@ -221,58 +227,30 @@ function Header() {
                 More <FaChevronDown className="text-xs" />
               </div> */}
             </motion.nav>
-            {!loggedinUser ? (
-              <motion.div
-                className="hidden lg:flex items-center gap-1 cursor-pointer"
-                onClick={handleMenu}
-                initial={{ opacity: 0, y: -30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.6 }}
-              >
-                <FaUserCircle className="text-2xl" />
-                <FaChevronDown className="text-xs" />
-
-                {profileMenu && (
-                  <div className="absolute top-14 right-5 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700" >Your Profile</a>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700" >Settings</a>
-                    <a href="#" className="block px-4 py-2 text-sm text-red-700" >Sign out</a>
+            {/* User/Profile section */}
+            <div className="hidden lg:flex items-center gap-4">
+              {user.isLoggedIn ? (
+                <div className="flex items-center gap-3 cursor-pointer px-3 py-2 rounded-lg hover:bg-gray-100 transition" onClick={handleMenu}>
+                  {/* <img src={user.avatar} alt="avatar" className="w-10 h-10 rounded-full object-cover border border-gray-200" /> */}
+                  <div className="flex flex-col items-start">
+                    <span className="text-xs text-gray-400 leading-none">Hi, Welcome</span>
+                    <span className="font-semibold text-gray-800 leading-none">{user.name}</span>
                   </div>
-                )}
-              </motion.div>
-            ) : (
-              <motion.div
-                className="hidden lg:flex items-center gap-4"
+                  <FaChevronDown className="ml-1 text-gray-500" />
+                </div>
+              ) : (
+                <motion.button
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.6 }}
-              >
-                <motion.div
-                  className="hidden lg:flex items-center gap-1"
-                  onClick={handleMenu}
-                  initial={{ opacity: 0, y: -30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 1.6 }}
+              
+                  onClick={() => navigate('/Register')}
+                  className="w-full px-5 py-2 cursor-pointer rounded-4xl bg-[#0d0c22] text-white font-semibold hover:bg-[#0d0c22]/80 transition"
                 >
-                  <FaUserCircle className="text-2xl" />
-                  <FaChevronDown className="text-xs" />
-
-                  {profileMenu && (
-                    <div className="absolute top-14 right-5 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" >
-                      <div className="flex flex-col p-2  ">
-                        <h2
-                          className="text-xs font-bold mb-2"
-
-                        >
-                          Sign up for OTG Cares. It's free.
-                        </h2>
-                        <button onClick={handleSignup} type="button" className="w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 cursor-pointer">Sign Up</button>
-                      </div>
-                    </div>
-                  )}
-                </motion.div>
-              </motion.div>
-            )}
+                  Login
+                </motion.button>
+              )}
+            </div>
 
             {/* Hamburger Menu */}
             <div className="lg:hidden">
@@ -291,7 +269,7 @@ function Header() {
             <motion.div
               className="lg:hidden bg-white px-5 py-4 shadow-md"
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
+              animate={{ opacity: 1, height: 'auto' }}
               transition={{ duration: 0.3 }}
             >
               <ul className="space-y-3 text-gray-700 text-lg font-semibold">
@@ -355,7 +333,10 @@ function Header() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.4 }}
                 >
+                                  <Link to="/otgTv" className="flex items-center gap-1 cursor-pointer">
+
                   Livspace TV
+                  </Link>
                 </motion.li>
                 {/* Livspace Portfolio */}
                 <motion.li
@@ -364,7 +345,10 @@ function Header() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.5 }}
                 >
+                                  <Link to="/portfolio" className="flex items-center gap-1 cursor-pointer">
+
                   Livspace Portfolio
+                  </Link>
                 </motion.li>
                 {/* About us */}
                 <motion.li
@@ -388,55 +372,29 @@ function Header() {
                 >
                   <Link to="/contact" className={`flex items-center gap-1 cursor-pointer ${isContactActive ? "text-red-700 font-bold" : ""}`}>Contact us</Link>
                 </motion.li>
-                {/* User/Profile logic as before */}
-                {loggedinUser ? (
-                  <motion.li
-                    className="mt-2 flex items-center gap-2 text-gray-600"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: 0.8 }}
-                  >
-                    <FaUserCircle className="text-2xl" />
-                  <FaChevronDown className="text-xs" />
-
-                  {profileMenu && (
-                    <div className="absolute top-14 right-5 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" >
-                      <div className="flex flex-col p-2  ">
-                        <h2
-                          className="text-xs font-bold mb-2"
-
-                        >
-                          Sign up for OTG Cares. It's free.
-                        </h2>
-                        <button onClick={handleSignup} type="button" className="w-full text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 cursor-pointer">Sign Up</button>
+                {/* User/Profile logic for mobile */}
+                <li className="mt-4">
+                  {user.isLoggedIn ? (
+                    <div className="flex items-center gap-3 cursor-pointer px-2 py-2 rounded-lg hover:bg-gray-100 transition" onClick={handleMenu}>
+                      {/* <img src={user.avatar} alt="avatar" className="w-9 h-9 rounded-full object-cover border border-gray-200" /> */}
+                      <div className="flex flex-col items-start">
+                        <span className="text-xs text-gray-400 leading-none">Hi, Welcome</span>
+                        <span className="font-semibold text-gray-800 leading-none">{user.name}</span>
                       </div>
+                      <FaChevronDown className="ml-1 text-gray-500" />
                     </div>
+                  ) : (
+                    <motion.button
+                    initial={{ opacity: 0, y: -30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 1.6 }}
+                      onClick={() => navigate('/login')}
+                      className="w-full px-5 py-2 rounded-4xl cursor-pointer bg-[#0d0c22] text-white font-semibold hover:bg-[#0d0c22]/80 transition"
+                    >
+                      Login
+                    </motion.button>
                   )}
-                  </motion.li>
-                ) : (
-                  <>
-                    <motion.li
-                      className="mt-2 flex items-center gap-2 text-gray-600 border-b pb-2"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.8 }}
-                    >
-                      <a href="/login" className="flex items-center gap-2">
-                        <FaUserCircle /> Login
-                      </a>
-                    </motion.li>
-                    <motion.li
-                      className="mt-2 flex items-center gap-2 text-gray-600"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.9 }}
-                    >
-                      <a href="/register" className="flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-md">
-                        Register
-                      </a>
-                    </motion.li>
-                  </>
-                )}
+                </li>
               </ul>
             </motion.div>
           )}

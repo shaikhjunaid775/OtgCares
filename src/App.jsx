@@ -9,11 +9,16 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Portfolio from './pages/Portfolio';
 import OTGTv from './pages/OTGTv';
+import ForgotPassword from './pages/ForgotPassword';
 
 const routes = createBrowserRouter([
   {
     path: "/register",
     element: <Register />
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />
   },
   {
     path: "/",

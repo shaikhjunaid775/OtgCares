@@ -32,6 +32,8 @@ const products = [
     },
 ];
 
+
+
 function Portfolio() {
     const location = useLocation();
     const pathnames = location.pathname.split('/').filter(Boolean);
