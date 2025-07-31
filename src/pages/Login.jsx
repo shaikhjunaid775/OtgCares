@@ -5,7 +5,7 @@ import AnimatedForm, {
   AnimatedInput, 
   AnimatedButton, 
   AnimatedText 
-} from '../component/AnimatedForm';
+} from '../component/Home/AnimatedForm';
 
 function Login() {
   return (

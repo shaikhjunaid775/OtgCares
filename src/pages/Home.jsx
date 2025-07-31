@@ -1,14 +1,14 @@
 import React from 'react'
-import Header from '../component/Header'
-import Banner from '../component/Banner'
+import Header from '../component/Home/Header'
+import Banner from '../component/Home/Banner'
 import { Outlet } from 'react-router-dom'
-import DesignIdeas from '../component/DesignIdeas'
-import BentoGallery from '../component/BentoGallery'
-import WhyChooseUs from '../component/WhyChooseUs'
-import CallToAction from '../component/CallToAction'
-import Testomonial from '../component/Testomonial'
-import Preview from '../component/Preview'
-import Faq from '../component/Faq'
+import DesignIdeas from '../component/Home/DesignIdeas'
+import BentoGallery from '../component/Home/BentoGallery'
+import WhyChooseUs from '../component/Home/WhyChooseUs'
+import CallToAction from '../component/Home/CallToAction'
+import Testomonial from '../component/Home/Testomonial'
+import Preview from '../component/Home/Preview'
+import Faq from '../component/Home/Faq'
 
 
 function Home() {

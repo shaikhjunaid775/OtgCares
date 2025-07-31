@@ -10,6 +10,8 @@ import Contact from './pages/Contact';
 import Portfolio from './pages/Portfolio';
 import OTGTv from './pages/OTGTv';
 import ForgotPassword from './pages/ForgotPassword';
+import Dashboard from './pages/admin/Dashboard';
+import { MenuContextProvider } from './context/MenuContext';
 
 const routes = createBrowserRouter([
   {
@@ -47,6 +49,10 @@ const routes = createBrowserRouter([
       {
         path: '/otgTv',
         element: <OTGTv />
+      },
+      {
+        path: '/admin/dashboard',
+        element: <Dashboard />
       }
     ],
   },
@@ -56,7 +62,9 @@ function App() {
   return (
     <>
     <AuthContextProvider>
+      <MenuContextProvider>
      <RouterProvider router={routes} />
+     </MenuContextProvider>
      </AuthContextProvider>
     </>
   )

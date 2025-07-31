@@ -1,5 +1,5 @@
 import React from 'react';
-import BreadCrumb from './../component/BreadCrumb';
+import BreadCrumb from '../component/Home/BreadCrumb';
 import { useLocation } from 'react-router-dom';
 
 const galleryImages = [
